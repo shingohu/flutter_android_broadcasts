@@ -6,7 +6,17 @@ part of 'flutter_broadcasts.dart';
 /// since they allow for _bundling_ multiple message types into a single
 /// receiver instead of subscribing to them individually.
 ///
-/// On iOS, this uses the [NSNotificationCenter API](https://developer.apple.com/documentation/foundation/notificationcenter).
+///
+enum BroadcastFlags {
+  RECEIVER_EXPORTED(0x02),
+  RECEIVER_NOT_EXPORTED(0x04);
+
+  final int value;
+  const BroadcastFlags(this.value);
+
+}
+
+
 class BroadcastReceiver {
   static int _index = 0;
 
@@ -18,13 +28,14 @@ class BroadcastReceiver {
   ///
   /// See [BroadcastMessage.name] for more details.
   final List<String> names;
+  final BroadcastFlags? flags;
 
   StreamSubscription? _subscription;
 
   /// Creates a new [BroadcastReceiver], which subscribes to the given [names].
   ///
   /// At least one name needs to be provided.
-  BroadcastReceiver({required this.names})
+  BroadcastReceiver({required this.names,this.flags})
       : assert(names.length > 0),
         _id = ++_index;
 
@@ -63,6 +74,7 @@ class BroadcastReceiver {
   Map<String, dynamic> toMap() => <String, dynamic>{
         'id': _id,
         'names': names,
+        'flags': flags?.value
       };
 
   @override

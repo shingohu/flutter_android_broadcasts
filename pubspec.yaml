@@ -1,25 +1,20 @@
-name: flutter_broadcasts_plus
-description: change flutter_broadcasts  add android namespace
+name: flutter_android_broadcasts
+description: android broadcast plugin for flutter.
 version: 0.0.1
-homepage: https://github.com/chengmengyi/flutter_broadcasts_plus
+homepage: https://github.com/shingohu/flutter_android_broadcasts
 
 environment:
-  sdk: ">=2.12.0 <4.0.0"
+  sdk: ">=2.17.0 <4.0.0"
   flutter: ">=1.20.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
-dev_dependencies:
-  flutter_test:
-    sdk: flutter
 
 flutter:
   plugin:
     platforms:
       android:
-        package: de.kevlatus.flutter_broadcasts
-        pluginClass: FlutterBroadcastsPlugin
-      ios:
+        package: de.shingo.flutter_broadcasts
         pluginClass: FlutterBroadcastsPlugin
